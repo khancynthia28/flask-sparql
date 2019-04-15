@@ -23,3 +23,10 @@ GET: Return list of all nobel winners for the given category
 
 /nobel/<year>/<category>
 GET: Return list of all nobel winners for the given year and category
+  
+### Requirements
+Python 3
+RDFLib
+  
+### Instructions to run:
+python3 nobel.py
