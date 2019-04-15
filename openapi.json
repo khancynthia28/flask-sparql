@@ -1,0 +1,337 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Nobel Ontology API",
+    "description" : "This is a simple API",
+    "contact" : {
+      "email" : "ckhan3@student.gsu.edu"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0-oas3"
+  },
+  "servers" : [ {
+    "url" : "http://tinman.cs.gsu.edu:5015/{basePath}",
+    "description" : "Development server",
+    "variables" : {
+      "basePath" : {
+        "default" : "v3"
+      },
+      "port" : {
+        "default" : "8080",
+        "enum" : [ "8080" ]
+      }
+    },
+    "x-location" : "California, USA"
+  } ],
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Nobeldata Ontology calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "paths" : {
+    "/nobel/years" : {
+      "get" : {
+        "summary" : "fetches unique years list",
+        "description" : "Gets all the years in which a nobel prize was awarded\n",
+        "operationId" : "getYear",
+        "responses" : {
+          "200" : {
+            "description" : "A list of years",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "example" : [ 1, 2, 3 ],
+                  "items" : {
+                    "type" : "integer",
+                    "format" : "int64"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/nations" : {
+      "get" : {
+        "summary" : "fetches unique nations list",
+        "description" : "Gets all unique nations of Nobel Prize winners\n",
+        "operationId" : "getNation",
+        "responses" : {
+          "200" : {
+            "description" : "get a list of countries",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/categories" : {
+      "get" : {
+        "summary" : "fetches unique nations list",
+        "description" : "Gets all unique nations of Nobel Prize winners\n",
+        "operationId" : "getCategory",
+        "responses" : {
+          "200" : {
+            "description" : "get a list of countries",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/filterYear/{year}" : {
+      "get" : {
+        "summary" : "Get all awardees for given year",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A list of prize winners",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/filterCategory/{category}" : {
+      "get" : {
+        "summary" : "Get all awardees for given year",
+        "operationId" : "filterCategory",
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "description" : "category name",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A list of prize winners",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/filterNation/{nation}" : {
+      "get" : {
+        "summary" : "Get all awardees for given country",
+        "operationId" : "filterNation",
+        "parameters" : [ {
+          "name" : "nation",
+          "in" : "path",
+          "description" : "country name",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A list of prize winners",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/filterCategoryYear/{category}/{year}" : {
+      "get" : {
+        "summary" : "Get all awardees for given category and year",
+        "operationId" : "filterCategoryYear",
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "description" : "category name",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A list of prize winners",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nobel/name/{name}" : {
+      "get" : {
+        "summary" : "Get details for given winner",
+        "operationId" : "name",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "winner name",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Details of the prize winner",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name."
+          },
+          "nationality" : {
+            "type" : "string",
+            "description" : "Nationality."
+          },
+          "yearWon" : {
+            "type" : "integer",
+            "description" : "Year award won."
+          },
+          "association" : {
+            "type" : "string",
+            "description" : "Association."
+          },
+          "birthYear" : {
+            "type" : "integer",
+            "description" : "Date of Birth."
+          },
+          "deathYear" : {
+            "type" : "integer",
+            "description" : "Died In."
+          },
+          "motivation" : {
+            "type" : "string",
+            "description" : "Motivation."
+          },
+          "photo" : {
+            "type" : "string",
+            "description" : "Image."
+          }
+        }
+      }
+    }
+  }
+}
